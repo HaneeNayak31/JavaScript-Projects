@@ -2,8 +2,7 @@
    CONFIG
 ======================= */
 
-const API_KEY = "YOUR_HF_API_KEY"; // Replace this with your actual Hugging Face API key
-const ROUTER_URL = "https://router.huggingface.co/nscale/v1/images/generations";
+const ROUTER_URL = "http://localhost:3000/api/generate-image";
 const baseSize = 512;
 
 /* =======================
@@ -83,7 +82,6 @@ async function queryImage({ model, prompt, width, height }) {
   const response = await fetch(ROUTER_URL, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({

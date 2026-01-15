@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let expenses = JSON.parse(localStorage.getItem("expenses") || []);
+  let expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
   const expenseForm = document.getElementById("expense-form");
   const expenseNameInput = document.getElementById("expense-name");
   const expenseAmountInput = document.getElementById("expense-amount");
   const expenseList = document.getElementById("expense-list");
   const totalAmountDisplay = document.getElementById("total-amount");
   let totalAmount = calculateTotal();
+  // Update the display immediately
+  updateTotal();
 
   renderExpenses();
   expenseForm.addEventListener("submit", (e) => {
@@ -31,7 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
     expenseList.innerHTML = "";
     expenses.forEach((expense) => {
       const li = document.createElement("li");
-      li.innerHTML = `${expense.name} - $${expense.amount}<button data-id="${expense.id}">Delete</button>`;
+      
+      // Safe rendering to prevent XSS
+      li.textContent = `${expense.name} - $${expense.amount.toFixed(2)}`;
+      
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.setAttribute("data-id", expense.id);
+      li.appendChild(deleteBtn);
+
       expenseList.appendChild(li);
     });
   }
@@ -44,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       localStorage.setItem("expenses", JSON.stringify(expenses));
     } catch (error) {
-      console.warn("Could not save expenses to localStorage:", err);
+      console.warn("Could not save expenses to localStorage:", error);
     }
   }
   function updateTotal() {

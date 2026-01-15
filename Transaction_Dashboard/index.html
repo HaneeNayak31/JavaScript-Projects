@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <title>Transaction Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Transaction Dashboard</h1>
+    </header>
+    <main>
+        <!-- Loading & Error -->
+        <div id="loading" class="hidden">
+            <div class="loader"></div>
+            <p>Loading transactions...</p>
+        </div>
+        <div id="error" class="hidden error-message"></div>
+
+        <!-- Metric Cards or Header (Optional, simple header for now) -->
+        
+        <!-- Filters Card -->
+        <section id="filters" class="card" aria-label="Transaction Filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="statusFilter">Filter by Status</label>
+                    <select id="statusFilter" data-filter="status">
+                        <option value="all">All</option>
+                        <option value="success">Success</option>
+                        <option value="pending">Pending</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortFilter">Sort By</label>
+                    <select id="sortFilter" data-sort="type">
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="amount-desc">Amount (High-Low)</option>
+                        <option value="amount-asc">Amount (Low-High)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group search-group">
+                    <label for="searchFilter">Search transactions...</label>
+                    <input type="text" id="searchFilter" placeholder="Search">
+                </div>
+            </div>
+        </section>
+
+        <!-- Transactions Table Card -->
+        <section id="transactions" class="card" aria-label="Transactions List">
+            <table id="transactionTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionBody">
+                    <!-- Rows will be rendered here by JS -->
+                </tbody>
+            </table>
+
+            <!-- Pagination Controls -->
+            <div id="pagination" aria-label="Pagination">
+                <button id="prevBtn" disabled>Prev</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextBtn">Next</button>
+            </div>
+        </section>
+
+        <!-- Add Transaction Form Card -->
+        <section id="add-transaction" class="card" aria-label="Add New Transaction">
+            <h2>Add Transaction</h2>
+            <form id="transactionForm" class="horizontal-form">
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" required min="0.01" step="0.01" placeholder="₹">
+                </div>
+                
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select id="type" required>
+                        <option value="debit">Expense</option>
+                        <option value="credit">Income</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" required>
+                        <option value="success">Success</option>
+                        <option value="pending">Pending</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                </div>
+
+                 <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date">
+                </div>
+
+                <div class="form-group button-group">
+                     <label>&nbsp;</label> 
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script type="module" src="JS/state.js"></script>
+    <script type="module" src="JS/api.js"></script>
+    <script type="module" src="JS/ui.js"></script>
+    <script type="module" src="JS/events.js"></script>
+    <script type="module" src="JS/main.js"></script>
+</body>
+</html>
