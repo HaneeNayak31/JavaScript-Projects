@@ -1,40 +1,38 @@
-# Transaction Dashboard
+# Transaction Dashboard 📊
 
-A robust, vanilla JavaScript Transaction Dashboard built to demonstrate core frontend engineering concepts without reliance on external frameworks.
+**Transaction Dashboard** is a comprehensive frontend application for managing and visualizing financial transactions. It features a responsive table with advanced filtering, sorting, pagination, and search capabilities, simulating a real-world banking interface.
 
-## 📌 Project Overview
-The **Transaction Dashboard** is a single-page application (SPA) that allows users to view, filter, sort, and search financial transactions. It simulates a real-world environment with mock API fetching, client-side state management, and local storage persistence.
+## 🚀 About the Project
 
-## ✨ Features
+This project simulates a financial dashboard where users can view a history of transactions, filter them by status (Success, Pending, Failed), sort by date or amount, and even add new transactions manually. It uses a mock API fetching strategy and LocalStorage to maintain state across sessions. The architecture leverages **ES6 Modules** for clean, maintainable code separation.
 
-- **Semantic HTML5 Structure**: Accessible layout using `<header>`, `<main>`, `<section>`, and `<nav>`.
-- **Mock API Layer**: Simulated `fetch` requests with network latency and randomized failure handling.
-- **Dynamic Table Rendering**: Efficient DOM manipulation using `DocumentFragment` (Zero `innerHTML` abuse).
-- **Client-Side Filters & Sorting**:
-  - Filter by Status (Success, Pending, Failed).
-  - Sort by Date (Newest/Oldest) and Amount (High/Low).
-- **Pagination**: Client-side pagination logic.
-- **Add Transaction Form**: Interactive form with validation to add new records.
-- **Persistence**: Transactions are saved to `localStorage`, preserving data across page reloads.
-- **Search**: Debounced "Search by ID" functionality for performance.
-- **UX States**: Loading spinners and user-friendly error messages for network failures.
-- **Responsive Design**: Modern Card-based layout with clean typography.
+## ✨ Key Features
 
-## 🛠 Tech Stack
-- **Languages**: HTML5, CSS3, JavaScript (ES6+).
-- **Architecture**: Modular JS (ES Modules) separating Service (API), State, Logic (Main), and View (UI).
-- **Storage**: Browser `localStorage`.
-- **Tools**: No frameworks or libraries. Pure Vanilla JS.
+-   **Data Table**: Displays transactions with details like Date, Amount, Status, and Type.
+-   **Advanced Filtering**: Filter records by status (All, Success, Pending, Failed).
+-   **Sorting & Search**: Sort by date or amount, and search transactions by ID.
+-   **Pagination**: Navigate through large datasets with page controls.
+-   **Add Transaction**: Form to input new expense/income entries.
+-   **State Management**: Centralized state with LocalStorage persistence.
+-   **Mock API**: Simulates fetching initial data from an external source if no local data exists.
 
-## 🧠 What I Learned
-Through building this project, I demonstrated mastery of:
-1.  **State Management**: Centralized state object acting as the single source of truth for UI rendering.
-2.  **Asynchronous JavaScript**: Handling `Promise` based APIs, `async/await`, and clean error handling patterns.
-3.  **DOM Manipulation**: Creating and updating DOM elements imperatively for maximum performance and security.
-4.  **Debouncing**: Optimizing high-frequency events (like search input) to improve performance.
-5.  **Browser APIs**: Utilizing `localStorage` for data persistence.
+## 🛠️ Tech Stack & Tools
 
-## 🚀 How to Run
-1.  Clone the repository or download the files.
-2.  Open `index.html` in any modern web browser.
-    - *Note*: For ES Modules to work, you may need to serve the file via a local server (e.g., VS Code Live Server extension, or `npx serve`, or `python -m http.server`) to avoid CORS policies on local `file://` protocol.
+-   **HTML5**: Semantic structure for the dashboard.
+-   **CSS3**: Styling for the card-based layout and responsive design.
+-   **JavaScript (ES6 Modules)**: Modular architecture separating concerns (API, State, UI, Events).
+-   **LocalStorage**: client-side data persistence.
+
+## 🏗️ How It Works
+
+1.  **Modular Structure**:
+    -   `main.js`: Entry point that initializes the app.
+    -   `state.js`: Manages the global state object (transactions, filters, pagination).
+    -   `api.js`: Handles mock data fetching.
+    -   `ui.js`: DOM manipulation functions for rendering the table and controls.
+    -   `events.js`: Event listeners for user interactions.
+2.  **Initialization**: On load, the app checks LocalStorage. If empty, it fetches mock data via `api.js` and saves it.
+3.  **Reactivity**: Actions like sorting or filtering update the central state, which then triggers `updateDashboard()` to re-calculate and re-render the view.
+
+---
+*Manage your money smarter.*
